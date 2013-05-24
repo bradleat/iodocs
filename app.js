@@ -721,9 +721,18 @@ app.post('/upload', function(req, res) {
 });
 
 // API shortname, all lowercase
-app.get('/:api([^\.]+)', function(req, res) {
+app.get('/api/:api([^\.]+)', function(req, res) {
     req.params.api=req.params.api.replace(/\/$/,'');
     res.render('api');
+});
+
+// API Single Document Requests
+app.get('/single/:api/:method_group/:method_name', function(req, res) {
+    res.render('single', {
+        title: req.params.method_name,
+        group: req.params.method_group,
+        single: true
+    });
 });
 
 // Only listen on $ node app.js
